@@ -2069,7 +2069,7 @@ type CharGlobalInfo struct {
 	palettedata      *Palette
 	snd              *Snd
 	anim             AnimationTable
-	palno, drawpalno int32
+	palno		 int32
 	pal              [MaxPalNo]string
 	palExist         [MaxPalNo]bool
 	palSelectable    [MaxPalNo]bool
