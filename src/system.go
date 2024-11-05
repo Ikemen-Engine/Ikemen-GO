@@ -1175,7 +1175,7 @@ func (s *System) nextRound() {
 				s.cgi[i].palettedata.palList.ResetRemap()
 				if s.cgi[i].sff.header.Ver0 == 1 {
 					p[0].remapPal(p[0].getPalfx(),
-						[...]int32{1, 1}, [...]int32{1, s.cgi[i].drawpalno})
+						[...]int32{1, 1}, [...]int32{1, s.cgi[i].palno})
 				}
 			}
 			s.cgi[i].clearPCTime()
@@ -3554,7 +3554,7 @@ func (l *Loader) reset() {
 	l.err = nil
 	for i := range sys.cgi {
 		if sys.roundsExisted[i&1] == 0 {
-			sys.cgi[i].drawpalno = -1
+			sys.cgi[i].palno = -1
 		}
 	}
 }
