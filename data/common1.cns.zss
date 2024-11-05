@@ -992,7 +992,7 @@ if roundsExisted = 0 {
 	varRangeSet{value: 0}
 	varRangeSet{fvalue: 0}
 }
-remapPal{source: 1, 1; dest: 1, ifElse(isHelper, palNo, drawPalNo)}
+remapPal{source: 1, 1; dest: 1, palNo}
 if roundNo = 1 {
 	changeState{value: 190}
 }
