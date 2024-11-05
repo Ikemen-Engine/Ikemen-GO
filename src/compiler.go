@@ -359,7 +359,6 @@ var triggerMap = map[string]int{
 	"dizzy":              1,
 	"dizzypoints":        1,
 	"dizzypointsmax":     1,
-	"drawpalno":          1,
 	"envshakevar":        1,
 	"explodvar":          1,
 	"fightscreenvar":     1,
@@ -4113,8 +4112,6 @@ func (c *Compiler) expValue(out *BytecodeExp, in *string,
 			return bvNone(), err
 		}
 		out.append(OC_ex_, OC_ex_playerindexexist)
-	case "drawpalno":
-		out.append(OC_ex_, OC_ex_drawpalno)
 	case "angle":
 		out.append(OC_ex_, OC_ex_angle)
 	case "scale":
