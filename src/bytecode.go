@@ -459,7 +459,6 @@ const (
 	OC_ex_roundsexisted
 	OC_ex_ishometeam
 	OC_ex_tickspersecond
-	OC_ex_drawpalno
 	OC_ex_const240p
 	OC_ex_const480p
 	OC_ex_const720p
@@ -2563,8 +2562,6 @@ func (be BytecodeExp) run_ex(c *Char, i *int, oc *Char) {
 		sys.bcStack.PushI(c.dizzyPoints)
 	case OC_ex_dizzypointsmax:
 		sys.bcStack.PushI(c.dizzyPointsMax)
-	case OC_ex_drawpalno:
-		sys.bcStack.PushI(c.gi().drawpalno)
 	case OC_ex_envshakevar_time:
 		sys.bcStack.PushI(sys.envShake.time)
 	case OC_ex_envshakevar_freq:
