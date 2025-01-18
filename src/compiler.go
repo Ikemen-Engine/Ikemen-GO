@@ -6716,7 +6716,7 @@ func (c *Compiler) Compile(pn int, def string, constants map[string]float32) (ma
 		return nil, err
 	}
 	lines, i, cmd, stcommon := SplitAndTrim(str, "\n"), 0, "", ""
-	var st [11]string
+	var st []string
 	info, files := true, true
 	for i < len(lines) {
 		// Parse each ini section
@@ -6782,10 +6782,14 @@ func (c *Compiler) Compile(pn int, def string, constants map[string]float32) (ma
 			if files {
 				files = false
 				cmd, stcommon = is["cmd"], is["stcommon"]
-				st[0] = is["st"]
-				for i := 1; i < len(st); i++ {
-					st[i] = is[fmt.Sprintf("st%v", i-1)]
+
+				re := regexp.MustCompile(`^st[0-9]*$`)
+				for _, v := range SortedKeys(is) {
+					if re.MatchString(v) {
+						st = append(st, is[v])
+					}
 				}
+				
 			}
 		}
 	}

@@ -1000,13 +1000,42 @@ func (ats *AnimTextSnd) End(dt int32, inf bool) bool {
 	return dt >= ats.displaytime
 }
 
-// SortedKeys returns the keys of the map sorted in ascending order.
+// SortedKeys returns the keys of the map sorted in natural order.
 // It works with any map where the key is a string.
-func SortedKeys[T any](m map[string][]T) []string {
+func SortedKeys[V any](m map[string]V) []string {
 	keys := make([]string, 0, len(m))
 	for key := range m {
 		keys = append(keys, key)
 	}
-	sort.Strings(keys)
+
+	// Sort using natural order
+	sort.Slice(keys, func(i, j int) bool {
+		return compareNatural(keys[i], keys[j])
+	})
+
 	return keys
+}
+
+// compareNatural compares two strings using natural order
+func compareNatural(a, b string) bool {
+	re := regexp.MustCompile(`^([a-zA-Z]+)(\d*)$`)
+
+	// Extract prefix and numeric parts for both strings
+	aMatches := re.FindStringSubmatch(a)
+	bMatches := re.FindStringSubmatch(b)
+
+	// Extract prefix and numeric part
+	aPrefix, aNumStr := aMatches[1], aMatches[2]
+	bPrefix, bNumStr := bMatches[1], bMatches[2]
+
+	// Compare prefixes lexicographically
+	if aPrefix != bPrefix {
+		return aPrefix < bPrefix
+	}
+
+	// Parse numeric part (default to 0 if empty)
+	aNum, _ := strconv.Atoi(aNumStr)
+	bNum, _ := strconv.Atoi(bNumStr)
+
+	return aNum < bNum
 }
